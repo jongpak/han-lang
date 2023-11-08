@@ -1,0 +1,22 @@
+{
+  "name": "han-lang",
+  "version": "0.0.1",
+  "description": "Hangeul Programming Language",
+  "author": "jongpak",
+  "scripts": {
+    "repl:tokenizer": "ts-node ./src/tokenizer/repl",
+    "repl:parser": "ts-node ./src/parser/repl",
+    "test": "jest"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.5",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "string-width": "^4.2.3"
+  }
+}
