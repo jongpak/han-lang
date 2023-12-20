@@ -8,9 +8,7 @@ test('ignore whitespace', () => {
     const tokens = tokeiner.getTokens();
 
     const parser = new Parser(tokens);
-    parser.parse();
-
-    const ast = parser.getAst();
+    const ast = parser.parse();
 
     expect(ast.length).toBe(0);
 });
@@ -22,9 +20,7 @@ test('ignore comment', () => {
     const tokens = tokeiner.getTokens();
 
     const parser = new Parser(tokens);
-    parser.parse();
-
-    const ast = parser.getAst();
+    const ast = parser.parse();
 
     expect(ast.length).toBe(0);
 });
@@ -36,9 +32,7 @@ test('ignore whitespace + comment', () => {
     const tokens = tokeiner.getTokens();
 
     const parser = new Parser(tokens);
-    parser.parse();
-
-    const ast = parser.getAst();
+    const ast = parser.parse();
 
     expect(ast.length).toBe(0);
 });

@@ -50,8 +50,6 @@ class Parser {
 
     private _position = 0;
 
-    private ast: TreeNode[] = [];
-
     private errors: ParseError[] = [];
 
     constructor(tokens: Token<TokenType>[]) {
@@ -59,11 +57,15 @@ class Parser {
             !(token instanceof WhitespaceToken) && !(token instanceof CommentToken));
     }
 
-    public parse() {
+    public parse(): TreeNode[] {
+        const ast: TreeNode[] = [];
+
         while (!this.isFinish()) {
             this.skipNonCodeToken();
 
-            if (this.processAssignmentStatement()) {
+            let statement = this.parseAssignmentStatement();
+            if (statement) {
+                ast.push(statement);
                 continue;
             }
 
@@ -71,18 +73,22 @@ class Parser {
                 break;
             }
 
-            this.ast.push(new UnknownSyntax(this.current()));
+            ast.push(new UnknownSyntax(this.current()));
             this.errors.push(new ParseError(
                 `해석할 수 없는 형식입니다`,
                 this.current(),
             ));
             this.forward();
         }
+
+        return ast;
     }
 
-    private processAssignmentStatement() {
+    private parseAssignmentStatement(): AssignmentStatement | null {
         const left = this.current();
         const op = this.peek(1);
+
+        let statement: AssignmentStatement | null = null;
 
         if (op instanceof AssignOperatorToken) {
             this.forward();
@@ -93,34 +99,28 @@ class Parser {
                 const functionDeclareExpression = this.parseFunctionDeclareExpression();
                 if (functionDeclareExpression) {
                     // 함수 표현식
-                    this.ast.push(
-                        new AssignmentStatement(
-                            op,
-                            new Identifier(left),
-                            functionDeclareExpression,
-                        )
+                    statement = new AssignmentStatement(
+                        op,
+                        new Identifier(left),
+                        functionDeclareExpression,
                     );
                 } else {
                     // 일반 표현식
-                    this.ast.push(
-                        new AssignmentStatement(
-                            op,
-                            new Identifier(left),
-                            this.parseExpression()
-                        )
+                    statement = new AssignmentStatement(
+                        op,
+                        new Identifier(left),
+                        this.parseExpression()
                     );
                 }
 
                 if (this.current() instanceof SemicolonToken) {
                     this.forward();
-                    return true;
                 } else {
                     this.errors.push(new ParseError(
                         '세미콜론이 없습니다',
                         this.current(),
                     ));
                     this.forward();
-                    return true;
                 }
             } else {
                 this.errors.push(new ParseError(
@@ -128,11 +128,10 @@ class Parser {
                     this.current(),
                 ));
                 this.forward();
-                return true;
             }
         }
 
-        return false;
+        return statement;
     }
 
     private parseFunctionDeclareExpression() {
@@ -161,7 +160,6 @@ class Parser {
                 }
                 if (this.peek(peekCount) instanceof RightParanToken) {
                     peekCount++;
-                    console.log('!!!');
                     break;
                 }
             }
@@ -405,7 +403,7 @@ class Parser {
             this.forward();
             return parameters;
         }
-        
+
         while (true) {
             const parameter = this.parseExpression();
             parameters.push(parameter);
@@ -423,10 +421,6 @@ class Parser {
             }
         }
         return parameters;
-    }
-
-    public getAst() {
-        return this.ast;
     }
 
     public getErrors() {

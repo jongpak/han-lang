@@ -16,9 +16,7 @@ test('assignment statement - number', () => {
     const tokens = tokeiner.getTokens();
 
     const parser = new Parser(tokens);
-    parser.parse();
-
-    const ast = parser.getAst();
+    const ast = parser.parse();
     const stmt = ast[0] as AssignmentStatement;
 
     expect(stmt.type).toBe(TreeNodeType.AssignmentStatement);
@@ -40,9 +38,7 @@ test('assignment statement - string', () => {
     const tokens = tokeiner.getTokens();
 
     const parser = new Parser(tokens);
-    parser.parse();
-
-    const ast = parser.getAst();
+    const ast = parser.parse();
     const stmt = ast[0] as AssignmentStatement;
 
     expect(stmt.type).toBe(TreeNodeType.AssignmentStatement);
@@ -64,9 +60,7 @@ test('assignment statement - true', () => {
     const tokens = tokeiner.getTokens();
 
     const parser = new Parser(tokens);
-    parser.parse();
-
-    const ast = parser.getAst();
+    const ast = parser.parse();
     const stmt = ast[0] as AssignmentStatement;
 
     expect(stmt.type).toBe(TreeNodeType.AssignmentStatement);
@@ -88,9 +82,7 @@ test('assignment statement - false', () => {
     const tokens = tokeiner.getTokens();
 
     const parser = new Parser(tokens);
-    parser.parse();
-
-    const ast = parser.getAst();
+    const ast = parser.parse();
     const stmt = ast[0] as AssignmentStatement;
 
     expect(stmt.left.type).toBe(TreeNodeType.Identifier);
@@ -109,9 +101,7 @@ test('assignment statement - function call', () => {
     const tokens = tokeiner.getTokens();
 
     const parser = new Parser(tokens);
-    parser.parse();
-
-    const ast = parser.getAst();
+    const ast = parser.parse();
     const stmt = ast[0] as AssignmentStatement;
 
     expect(stmt.left.type).toBe(TreeNodeType.Identifier);
@@ -131,9 +121,7 @@ test('assignment statement - function call (multi parameters)', () => {
     const tokens = tokeiner.getTokens();
 
     const parser = new Parser(tokens);
-    parser.parse();
-
-    const ast = parser.getAst();
+    const ast = parser.parse();
     const stmt = ast[0] as AssignmentStatement;
 
     expect(stmt.left.type).toBe(TreeNodeType.Identifier);
@@ -153,12 +141,8 @@ test('assignment statement - function declare', () => {
     const tokens = tokeiner.getTokens();
 
     const parser = new Parser(tokens);
-    parser.parse();
-
-    const ast = parser.getAst();
+    const ast = parser.parse();
     const stmt = ast[0] as AssignmentStatement;
-
-    console.dir(ast);
 
     expect(stmt.left.type).toBe(TreeNodeType.Identifier);
     expect(stmt.left.name).toBe('함수명');
