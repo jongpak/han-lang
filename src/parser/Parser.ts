@@ -35,12 +35,12 @@ const operatorPrecedence = {
 
     [TokenType.OP_MULTIPLY]:   900,
     [TokenType.OP_DIVIDE]:     900,
-    
+
     [TokenType.OP_PLUS]:       800,
     [TokenType.OP_MINUS]:      800,
 
-    [TokenType.OP_EQUAL]:       500,
-    [TokenType.OP_NOT_EQUAL]:   500,
+    [TokenType.OP_EQUAL]:      500,
+    [TokenType.OP_NOT_EQUAL]:  500,
 
     [TokenType.LEFT_PAREN]:    100,
 }
@@ -177,7 +177,7 @@ class Parser {
         peekCount++;
 
         this.forward(peekCount);
-        
+
         const body: TreeNode[] = [];
 
         return new FunctionDeclareExpression(token, parameters, body);
