@@ -2,7 +2,7 @@ import { Reader } from "../Reader";
 
 test('reader basic', () => {
     const reader = new Reader('123');
-    
+
     expect(reader.current()).toBe('1');
     expect(reader.row()).toBe(0);
     expect(reader.col()).toBe(0);
@@ -24,7 +24,7 @@ test('reader basic', () => {
 
 test('reader finish', () => {
     const reader = new Reader('123');
-    
+
     reader.forward();
     reader.forward();
     reader.forward();
@@ -35,7 +35,7 @@ test('reader finish', () => {
 
 test('reader multi line', () => {
     const reader = new Reader('123\n456\n\n');
-    
+
     reader.forward();
     reader.forward();
     reader.forward();
@@ -71,7 +71,7 @@ test('reader multi line', () => {
 
 test('reader Hangeul col', () => {
     const reader = new Reader('가나다');
-    
+
     expect(reader.current()).toBe('가');
     expect(reader.col()).toBe(0);
     reader.forward();
