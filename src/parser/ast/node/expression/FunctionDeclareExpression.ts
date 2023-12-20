@@ -19,7 +19,7 @@ class FunctionDeclareExpression extends TreeNode {
 
     public toString(): string {
         return `(${this.parameters.map((args) => args.toString()).join(', ')}) {
-    ${this.body.map((args) => args.toString()).join('\n')}
+    ${this.body.map((args) => `${args.toString().split('\n').join('\n    ')}`).join('\n    ')}
 }`;
     }
 }

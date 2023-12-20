@@ -21,7 +21,7 @@ import { MultiplyExpression } from "./ast/node/expression/MultiplyExpression";
 import { DivideExpression } from "./ast/node/expression/DivideExpression";
 import { PlusExpression } from "./ast/node/expression/PlusExpression";
 import { MinusExpression } from "./ast/node/expression/MinusExpression";
-import { LeftBraceToken, LeftParanToken, RightParanToken } from "../tokenizer/token/tokens/bracket";
+import { LeftBraceToken, LeftParanToken, RightBraceToken, RightParanToken } from "../tokenizer/token/tokens/bracket";
 import { FunctionCallExpression } from "./ast/node/expression/FunctionCallExpression";
 import { FunctionDeclareExpression } from "./ast/node/expression/FunctionDeclareExpression";
 import { CommaToken } from "../tokenizer/token/tokens/comma";
@@ -63,7 +63,7 @@ class Parser {
         while (!this.isFinish()) {
             this.skipNonCodeToken();
 
-            let statement = this.parseAssignmentStatement();
+            let statement = this.parseStatement()
             if (statement) {
                 ast.push(statement);
                 continue;
@@ -82,6 +82,17 @@ class Parser {
         }
 
         return ast;
+    }
+
+    private parseStatement() {
+        this.skipNonCodeToken();
+
+        let statement = this.parseAssignmentStatement();
+        if (statement) {
+            return statement;
+        }
+
+        return null;
     }
 
     private parseAssignmentStatement(): AssignmentStatement | null {
@@ -135,7 +146,6 @@ class Parser {
     }
 
     private parseFunctionDeclareExpression() {
-        // return null;
         const token = this.current();
         if (!(token instanceof LeftParanToken)) {
             return;
@@ -145,6 +155,7 @@ class Parser {
 
         const parameters: IdentifierToken[] = [];
 
+        // 함수 파라미터 파싱
         while (this.peek(peekCount)) {
             if (this.peek(peekCount) instanceof RightParanToken) {
                 peekCount++;
@@ -168,15 +179,30 @@ class Parser {
             return;
         }
 
-        // 함수 정의 표현식 아님
+        // 함수 파라미터 파싱이 끝다면, 함수 본문이 시작되는 '{' 중괄호가 나와야함
+        // 그렇지 않으면, 올바른 함수 정의 표현식 아님
         if (!(this.peek(peekCount) instanceof LeftBraceToken)) {
             return;
         }
         peekCount++;
 
+        // consume '{'
         this.forward(peekCount);
 
         const body: TreeNode[] = [];
+        while (!this.isFinish() && !(this.current() instanceof RightBraceToken)) {
+            const statement = this.parseStatement();
+            if (!statement) {
+                break;
+            }
+
+            body.push(statement);
+        }
+
+        // consume '}'
+        if (this.current() instanceof RightBraceToken) {
+            this.forward();
+        }
 
         return new FunctionDeclareExpression(token, parameters, body);
     }

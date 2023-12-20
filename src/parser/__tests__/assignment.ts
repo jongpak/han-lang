@@ -135,7 +135,7 @@ test('assignment statement - function call (multi parameters)', () => {
 });
 
 test('assignment statement - function declare', () => {
-    const str = '함수명 = (인자1, 인자2) { 어쩌구 = 3; };';
+    const str = '함수명 = (인자1, 인자2) { 어쩌구 = 3; 합 = 인자1 + 인자2; };';
     const tokeiner = new Tokenizer(str);
     tokeiner.tokenize();
     const tokens = tokeiner.getTokens();
@@ -149,7 +149,7 @@ test('assignment statement - function declare', () => {
 
     expect(stmt.right.type).toBe(TreeNodeType.FunctionDeclareExpression);
     expect((stmt.right as FunctionDeclareExpression).parameters.length).toBe(2);
-    expect((stmt.right as FunctionDeclareExpression).body.length).toBe(1);
+    expect((stmt.right as FunctionDeclareExpression).body.length).toBe(2);
 
     expect(ast.length).toBe(1);
 });

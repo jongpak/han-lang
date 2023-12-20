@@ -22,28 +22,28 @@ rl.on('line', (line) => {
     tokenizer.tokenize();
 
     const parser = new Parser(tokenizer.getTokens());
-    parser.parse();
+    const ast = parser.parse();
 
     console.log('<< Token >>')
     console.log(tokenizer.getTokens());
     console.log();
 
     console.log('<< AST >>');
-    console.dir(parser.getAst(), { maxArrayLength: null, depth: null });
+    console.dir(ast, { maxArrayLength: null, depth: null });
     console.log();
 
     console.log('<< Parsed Code >>');
-    console.log(parser.getAst().map((node) => node.toString()).join('\n'));
+    console.log(ast.map((node) => node.toString()).join('\n'));
     console.log();
 
     console.log('<< ERRORS >>');
     console.log(parser.getErrors());
     parser.getErrors().forEach((error) => {
         console.log(`(line: ${error.token.position.row + 1}, col: ${error.token.position.col + 1}) - ${error.message}`);
-    
+
         const errorLine = findLine(line, error.token.position.pos);
         const errorStart = stringWidth(errorLine.substring(0, error.token.position.col));
-    
+
         console.log();
         console.log(`    ${errorLine}`);
         console.log(`    ${''.padEnd(errorStart) + '^'}`);
