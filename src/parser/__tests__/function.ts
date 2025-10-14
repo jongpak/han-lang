@@ -1,9 +1,12 @@
 import { Tokenizer } from '../../tokenizer';
 import { FunctionCallExpression } from '../ast/node/expression/FunctionCallExpression';
+import type { FunctionDeclareExpression } from '../ast/node/expression/FunctionDeclareExpression';
+import type { PlusExpression } from '../ast/node/expression/PlusExpression';
 import type { Identifier } from '../ast/node/Identifier';
 import type { BooleanLiteral } from '../ast/node/literal/BooleanLiteral';
 import type { NumberLiteral } from '../ast/node/literal/NumberLiteral';
 import type { StringLiteral } from '../ast/node/literal/StringLiteral';
+import { AssignmentStatement } from '../ast/node/statement/AssignmentStatement';
 import { TreeNodeType } from '../ast/TreeNode';
 import { Parser } from '../Parser';
 
@@ -45,9 +48,6 @@ test('function - parameter: literal', () => {
   expect(stmt.parameters[2].type).toBe(TreeNodeType.BooleanLiteral);
   expect((stmt.parameters[2] as BooleanLiteral).value).toBe(true);
 
-  expect(stmt instanceof FunctionCallExpression).toBe(true);
-  expect(stmt.name).toBe('어떤함수');
-  expect(stmt.parameters.length).toBe(0);
   expect(ast.length).toBe(1);
 });
 
@@ -63,7 +63,7 @@ test('function - parameter: 변수, 다른 함수의 값', () => {
 
   expect(stmt instanceof FunctionCallExpression).toBe(true);
   expect(stmt.name).toBe('어떤함수');
-  expect(stmt.parameters.length).toBe(2);
+  expect(stmt.parameters.length).toBe(3);
 
   expect(stmt.parameters[0].type).toBe(TreeNodeType.Identifier);
   expect((stmt.parameters[0] as Identifier).name).toBe('어떤변수');
@@ -82,8 +82,58 @@ test('function - parameter: 변수, 다른 함수의 값', () => {
   expect((stmt.parameters[2] as FunctionCallExpression).parameters[2].type).toBe(TreeNodeType.BooleanLiteral);
   expect(((stmt.parameters[2] as FunctionCallExpression).parameters[2] as BooleanLiteral).value).toBe(true);
 
-  expect(stmt instanceof FunctionCallExpression).toBe(true);
-  expect(stmt.name).toBe('어떤함수');
-  expect(stmt.parameters.length).toBe(0);
+  expect(ast.length).toBe(1);
+});
+
+test('function - declare', () => {
+  const str = '함수명 = (인자1, 인자2) { 어쩌구 = 3; 합 = 인자1 + 인자2; };';
+  const tokeiner = new Tokenizer(str);
+  tokeiner.tokenize();
+  const tokens = tokeiner.getTokens();
+
+  const parser = new Parser(tokens);
+  const ast = parser.parse();
+  const stmt = ast[0] as AssignmentStatement;
+
+  expect(stmt.left.type).toBe(TreeNodeType.Identifier);
+  expect(stmt.left.name).toBe('함수명');
+
+  expect(stmt.right.type).toBe(TreeNodeType.FunctionDeclareExpression);
+  expect((stmt.right as FunctionDeclareExpression).parameters.length).toBe(2);
+  expect((stmt.right as FunctionDeclareExpression).body.length).toBe(2);
+
+  expect((stmt.right as FunctionDeclareExpression).body[0] instanceof AssignmentStatement).toBe(true);
+  expect(((stmt.right as FunctionDeclareExpression).body[0] as AssignmentStatement).left.name).toBe('어쩌구');
+  expect(((stmt.right as FunctionDeclareExpression).body[0] as AssignmentStatement).right.type).toBe(
+    TreeNodeType.NumberLiteral,
+  );
+  expect(
+    (((stmt.right as FunctionDeclareExpression).body[0] as AssignmentStatement).right as NumberLiteral).value,
+  ).toBe(3);
+
+  expect((stmt.right as FunctionDeclareExpression).body[1] instanceof AssignmentStatement).toBe(true);
+  expect(((stmt.right as FunctionDeclareExpression).body[1] as AssignmentStatement).left.name).toBe('합');
+  expect(((stmt.right as FunctionDeclareExpression).body[1] as AssignmentStatement).right.type).toBe(
+    TreeNodeType.PlusExpression,
+  );
+  expect(
+    (((stmt.right as FunctionDeclareExpression).body[1] as AssignmentStatement).right as PlusExpression).left.type,
+  ).toBe(TreeNodeType.Identifier);
+  expect(
+    (
+      (((stmt.right as FunctionDeclareExpression).body[1] as AssignmentStatement).right as PlusExpression)
+        .left as Identifier
+    ).name,
+  ).toBe('인자1');
+  expect(
+    (((stmt.right as FunctionDeclareExpression).body[1] as AssignmentStatement).right as PlusExpression).right.type,
+  ).toBe(TreeNodeType.Identifier);
+  expect(
+    (
+      (((stmt.right as FunctionDeclareExpression).body[1] as AssignmentStatement).right as PlusExpression)
+        .right as Identifier
+    ).name,
+  ).toBe('인자2');
+
   expect(ast.length).toBe(1);
 });

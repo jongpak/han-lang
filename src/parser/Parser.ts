@@ -89,12 +89,21 @@ export class Parser {
   private parseStatement() {
     this.skipNonCodeToken();
 
-    let statement = this.parseAssignmentStatement();
+    const statement =
+      this.parseAssignmentStatement() || // 할당문
+      this.parseExpressionStatement() || // 표현식 문
+      null;
+
     if (statement) {
-      return statement;
+      if (this.current() instanceof SemicolonToken) {
+        this.forward();
+      } else {
+        this.errors.push(new ParseError('세미콜론이 없습니다', this.current()));
+        this.forward();
+      }
     }
 
-    return null;
+    return statement;
   }
 
   private parseAssignmentStatement(): AssignmentStatement | null {
@@ -109,21 +118,7 @@ export class Parser {
       if (left instanceof IdentifierToken) {
         this.forward();
 
-        const functionDeclareExpression = this.parseFunctionDeclareExpression();
-        if (functionDeclareExpression) {
-          // 함수 표현식
-          statement = new AssignmentStatement(op, new Identifier(left), functionDeclareExpression);
-        } else {
-          // 일반 표현식
-          statement = new AssignmentStatement(op, new Identifier(left), this.parseExpression());
-        }
-
-        if (this.current() instanceof SemicolonToken) {
-          this.forward();
-        } else {
-          this.errors.push(new ParseError('세미콜론이 없습니다', this.current()));
-          this.forward();
-        }
+        statement = new AssignmentStatement(op, new Identifier(left), this.parseExpressionStatement());
       } else {
         this.errors.push(new ParseError('할당문의 왼쪽에는 식별자가 와야합니다', this.current()));
         this.forward();
@@ -131,6 +126,17 @@ export class Parser {
     }
 
     return statement;
+  }
+
+  private parseExpressionStatement() {
+    const functionDeclareExpression = this.parseFunctionDeclareExpression();
+    if (functionDeclareExpression) {
+      // 함수 표현식
+      return functionDeclareExpression;
+    } else {
+      // 일반 표현식
+      return this.parseExpression();
+    }
   }
 
   private parseFunctionDeclareExpression() {
