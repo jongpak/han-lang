@@ -3,7 +3,7 @@ import { TokenType } from '../../tokenizer/token/TokenType';
 import { Parser } from '../Parser';
 import { TreeNodeType } from '../ast/TreeNode';
 import type { FunctionCallExpression } from '../ast/node/expression/FunctionCallExpression';
-import type { FunctionDeclareExpression } from '../ast/node/expression/FunctionDeclareExpression';
+import type { PlusExpression } from '../ast/node/expression/PlusExpression';
 import type { BooleanLiteral } from '../ast/node/literal/BooleanLiteral';
 import type { NumberLiteral } from '../ast/node/literal/NumberLiteral';
 import type { StringLiteral } from '../ast/node/literal/StringLiteral';
@@ -110,6 +110,30 @@ test('assignment statement - function call', () => {
   expect(stmt.right.type).toBe(TreeNodeType.FunctionCallExpression);
   expect((stmt.right as FunctionCallExpression).name).toBe('함수값');
   expect((stmt.right as FunctionCallExpression).parameters.length).toBe(0);
+
+  expect(ast.length).toBe(1);
+});
+
+test('assignment statement - function call 2', () => {
+  const str = '결과 = 1 + 함수값();';
+  const tokeiner = new Tokenizer(str);
+  tokeiner.tokenize();
+  const tokens = tokeiner.getTokens();
+
+  const parser = new Parser(tokens);
+  const ast = parser.parse();
+  const stmt = ast[0] as AssignmentStatement;
+
+  expect(stmt.left.type).toBe(TreeNodeType.Identifier);
+  expect(stmt.left.name).toBe('결과');
+
+  expect(stmt.right.type).toBe(TreeNodeType.PlusExpression);
+  expect((stmt.right as PlusExpression).left.type).toBe(TreeNodeType.NumberLiteral);
+  expect(((stmt.right as PlusExpression).left as NumberLiteral).value).toBe(1);
+
+  expect((stmt.right as PlusExpression).right.type).toBe(TreeNodeType.FunctionCallExpression);
+  expect(((stmt.right as PlusExpression).right as FunctionCallExpression).name).toBe('함수값');
+  expect(((stmt.right as PlusExpression).right as FunctionCallExpression).parameters.length).toBe(0);
 
   expect(ast.length).toBe(1);
 });
