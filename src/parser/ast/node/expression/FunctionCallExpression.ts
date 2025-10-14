@@ -1,28 +1,28 @@
-import { LeftParanToken } from "../../../../tokenizer/token/tokens/bracket";
-import { TreeNode, TreeNodeType } from "../../TreeNode";
-import { Identifier } from "../Identifier";
+import type { LeftParanToken } from '../../../../tokenizer/token/tokens/bracket';
+import { TreeNode, TreeNodeType } from '../../TreeNode';
+import type { Identifier } from '../Identifier';
 
 export class FunctionCallExpression extends TreeNode {
-    public readonly type = TreeNodeType.FunctionCallExpression;
+  public readonly type = TreeNodeType.FunctionCallExpression;
 
-    public readonly token: LeftParanToken;
+  public readonly token: LeftParanToken;
 
-    public readonly identifier: Identifier;
-    public readonly name: string;
+  public readonly identifier: Identifier;
+  public readonly name: string;
 
-    public readonly parameters: TreeNode[];
+  public readonly parameters: TreeNode[];
 
-    constructor(token: LeftParanToken, identifier: Identifier, parameters: TreeNode[]) {
-        super();
+  constructor(token: LeftParanToken, identifier: Identifier, parameters: TreeNode[]) {
+    super();
 
-        this.token = token;
-        this.identifier = identifier;
-        this.parameters = parameters;
+    this.token = token;
+    this.identifier = identifier;
+    this.parameters = parameters;
 
-        this.name = identifier.name;
-    }
+    this.name = identifier.name;
+  }
 
-    public toString(): string {
-        return `${this.name}(${this.parameters.map((args) => args.toString()).join(', ')})`;
-    }
+  public toString(): string {
+    return `${this.name}(${this.parameters.map((args) => args.toString()).join(', ')})`;
+  }
 }

@@ -1,21 +1,21 @@
-import { IdentifierToken } from "../../../tokenizer/token/tokens/identifier";
-import { TreeNode, TreeNodeType } from "../TreeNode";
+import type { IdentifierToken } from '../../../tokenizer/token/tokens/identifier';
+import { TreeNode, TreeNodeType } from '../TreeNode';
 
 export class Identifier extends TreeNode {
-    public type = TreeNodeType.Identifier;
+  public type = TreeNodeType.Identifier;
 
-    public token: IdentifierToken;
+  public token: IdentifierToken;
 
-    public name: string;
+  public name: string;
 
-    constructor(token: IdentifierToken) {
-        super();
+  constructor(token: IdentifierToken) {
+    super();
 
-        this.token = token;
-        this.name = token.value;
-    }
+    this.token = token;
+    this.name = token.value;
+  }
 
-    public toString(): string {
-        return this.token.value;
-    }
+  public toString(): string {
+    return this.token.value;
+  }
 }

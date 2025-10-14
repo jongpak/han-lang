@@ -1,27 +1,27 @@
-import { MinusOperatorToken } from "../../../../tokenizer/token/tokens/operator";
-import { TreeNode, TreeNodeType } from "../../TreeNode";
+import type { MinusOperatorToken } from '../../../../tokenizer/token/tokens/operator';
+import { TreeNode, TreeNodeType } from '../../TreeNode';
 
 export class MinusExpression extends TreeNode {
-    public readonly type = TreeNodeType.MinusExpression;
+  public readonly type = TreeNodeType.MinusExpression;
 
-    public readonly token: MinusOperatorToken;
+  public readonly token: MinusOperatorToken;
 
-    public readonly operator: string;
+  public readonly operator: string;
 
-    public readonly left: TreeNode;
-    public readonly right: TreeNode;
+  public readonly left: TreeNode;
+  public readonly right: TreeNode;
 
-    constructor(token: MinusOperatorToken, left: TreeNode, right: TreeNode) {
-        super();
+  constructor(token: MinusOperatorToken, left: TreeNode, right: TreeNode) {
+    super();
 
-        this.token = token;
-        this.left = left;
-        this.right = right;
+    this.token = token;
+    this.left = left;
+    this.right = right;
 
-        this.operator = token.value;
-    }
+    this.operator = token.value;
+  }
 
-    public toString(): string {
-        return `(${this.left.toString()} ${this.operator} ${this.right.toString()})`;
-    }
+  public toString(): string {
+    return `(${this.left.toString()} ${this.operator} ${this.right.toString()})`;
+  }
 }

@@ -1,6 +1,6 @@
-import { Token } from "../Token";
-import { TokenType } from "../TokenType";
+import { Token } from '../Token';
+import { TokenType } from '../TokenType';
 
 export class CommaToken extends Token<TokenType.COMMA, ','> {
-    public readonly type = TokenType.COMMA;
+  public readonly type = TokenType.COMMA;
 }

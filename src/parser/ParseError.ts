@@ -1,13 +1,13 @@
-import { Token } from "../tokenizer/token/Token";
-import { TokenType } from "../tokenizer/token/TokenType";
+import type { Token } from '../tokenizer/token/Token';
+import type { TokenType } from '../tokenizer/token/TokenType';
 
 export class ParseError {
-    public readonly message: string;
+  public readonly message: string;
 
-    public readonly token: Token<TokenType>;
+  public readonly token: Token<TokenType>;
 
-    constructor(message: string, token: Token<TokenType>) {
-        this.message = message;
-        this.token = token;
-    }
+  constructor(message: string, token: Token<TokenType>) {
+    this.message = message;
+    this.token = token;
+  }
 }

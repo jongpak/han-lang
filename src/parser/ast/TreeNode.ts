@@ -1,34 +1,34 @@
-import { Token } from "../../tokenizer/token/Token";
-import { TokenType } from "../../tokenizer/token/TokenType";
+import type { Token } from '../../tokenizer/token/Token';
+import type { TokenType } from '../../tokenizer/token/TokenType';
 
 export enum TreeNodeType {
-    Unknown = "Unknown",
+  Unknown = 'Unknown',
 
-    AssignmentStatement = "AssignmentStatement",
-    IfStatement = "IfStatement",
+  AssignmentStatement = 'AssignmentStatement',
+  IfStatement = 'IfStatement',
 
-    Identifier = "Identifier",
+  Identifier = 'Identifier',
 
-    PlusExpression = "PlusExpression",
-    MinusExpression = "MinusExpression",
-    MultiplyExpression = "MultiplyExpression",
-    DivideExpression = "DivideExpression",
+  PlusExpression = 'PlusExpression',
+  MinusExpression = 'MinusExpression',
+  MultiplyExpression = 'MultiplyExpression',
+  DivideExpression = 'DivideExpression',
 
-    EqualExpression = "EqualExpression",
-    NotEqualExpression = "NotEqualExpression",
+  EqualExpression = 'EqualExpression',
+  NotEqualExpression = 'NotEqualExpression',
 
-    NumberLiteral = "NumberLiteral",
-    StringLiteral = "StringLiteral",
-    BooleanLiteral = "BooleanLiteral",
+  NumberLiteral = 'NumberLiteral',
+  StringLiteral = 'StringLiteral',
+  BooleanLiteral = 'BooleanLiteral',
 
-    FunctionCallExpression = "FunctionCallExpression",
-    FunctionDeclareExpression = "FunctionDeclareExpression",
+  FunctionCallExpression = 'FunctionCallExpression',
+  FunctionDeclareExpression = 'FunctionDeclareExpression',
 }
 
 export abstract class TreeNode {
-    public abstract readonly type: TreeNodeType;
+  public abstract readonly type: TreeNodeType;
 
-    public abstract readonly token: Token<TokenType>;
+  public abstract readonly token: Token<TokenType>;
 
-    public abstract toString(): string;
+  public abstract toString(): string;
 }

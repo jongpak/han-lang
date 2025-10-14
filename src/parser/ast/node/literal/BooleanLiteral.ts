@@ -1,23 +1,22 @@
-import { TokenType } from "../../../../tokenizer/token/TokenType";
-import { FalseToken, TrueToken } from "../../../../tokenizer/token/tokens/boolean";
-import { TreeNode, TreeNodeType } from "../../TreeNode";
+import { TokenType } from '../../../../tokenizer/token/TokenType';
+import type { FalseToken, TrueToken } from '../../../../tokenizer/token/tokens/boolean';
+import { TreeNode, TreeNodeType } from '../../TreeNode';
 
 export class BooleanLiteral extends TreeNode {
-    public type = TreeNodeType.BooleanLiteral;
+  public type = TreeNodeType.BooleanLiteral;
 
-    public token: TrueToken | FalseToken;
+  public token: TrueToken | FalseToken;
 
-    public value: boolean;
+  public value: boolean;
 
-    constructor(token: TrueToken | FalseToken) {
-        super();
+  constructor(token: TrueToken | FalseToken) {
+    super();
 
-        this.token = token;
-        this.value = token.type === TokenType.TRUE;
-    }
+    this.token = token;
+    this.value = token.type === TokenType.TRUE;
+  }
 
-    public toString(): string {
-        return this.value ? '참' : '거짓';
-    }
-
+  public toString(): string {
+    return this.value ? '참' : '거짓';
+  }
 }

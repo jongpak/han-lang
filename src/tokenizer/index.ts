@@ -1,1 +1,1 @@
-export { Tokenizer } from "./Tokenizer";
+export { Tokenizer } from './Tokenizer';

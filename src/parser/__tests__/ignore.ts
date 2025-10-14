@@ -1,38 +1,38 @@
-import { Tokenizer } from "../../tokenizer";
-import { Parser } from "../Parser";
+import { Tokenizer } from '../../tokenizer';
+import { Parser } from '../Parser';
 
 test('ignore whitespace', () => {
-    const str = '\n\r\t ';
-    const tokeiner = new Tokenizer(str);
-    tokeiner.tokenize();
-    const tokens = tokeiner.getTokens();
+  const str = '\n\r\t ';
+  const tokeiner = new Tokenizer(str);
+  tokeiner.tokenize();
+  const tokens = tokeiner.getTokens();
 
-    const parser = new Parser(tokens);
-    const ast = parser.parse();
+  const parser = new Parser(tokens);
+  const ast = parser.parse();
 
-    expect(ast.length).toBe(0);
+  expect(ast.length).toBe(0);
 });
 
 test('ignore comment', () => {
-    const str = '// 이것은 코멘트입니다';
-    const tokeiner = new Tokenizer(str);
-    tokeiner.tokenize();
-    const tokens = tokeiner.getTokens();
+  const str = '// 이것은 코멘트입니다';
+  const tokeiner = new Tokenizer(str);
+  tokeiner.tokenize();
+  const tokens = tokeiner.getTokens();
 
-    const parser = new Parser(tokens);
-    const ast = parser.parse();
+  const parser = new Parser(tokens);
+  const ast = parser.parse();
 
-    expect(ast.length).toBe(0);
+  expect(ast.length).toBe(0);
 });
 
 test('ignore whitespace + comment', () => {
-    const str = '// 이것은 코멘트입니다\n\r\t ';
-    const tokeiner = new Tokenizer(str);
-    tokeiner.tokenize();
-    const tokens = tokeiner.getTokens();
+  const str = '// 이것은 코멘트입니다\n\r\t ';
+  const tokeiner = new Tokenizer(str);
+  tokeiner.tokenize();
+  const tokens = tokeiner.getTokens();
 
-    const parser = new Parser(tokens);
-    const ast = parser.parse();
+  const parser = new Parser(tokens);
+  const ast = parser.parse();
 
-    expect(ast.length).toBe(0);
+  expect(ast.length).toBe(0);
 });

@@ -1,22 +1,21 @@
-import { StringToken } from "../../../../tokenizer/token/tokens/string";
-import { TreeNode, TreeNodeType } from "../../TreeNode";
+import type { StringToken } from '../../../../tokenizer/token/tokens/string';
+import { TreeNode, TreeNodeType } from '../../TreeNode';
 
 export class StringLiteral extends TreeNode {
-    public type = TreeNodeType.StringLiteral;
+  public type = TreeNodeType.StringLiteral;
 
-    public token: StringToken;
+  public token: StringToken;
 
-    public value: string;
+  public value: string;
 
-    constructor(token: StringToken) {
-        super();
+  constructor(token: StringToken) {
+    super();
 
-        this.token = token;
-        this.value = token.value.substring(1, token.value.length - 1);
-    }
+    this.token = token;
+    this.value = token.value.substring(1, token.value.length - 1);
+  }
 
-    public toString(): string {
-        return `"${this.value.replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/"/g, '\\"')}"`;
-    }
-
+  public toString(): string {
+    return `"${this.value.replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/"/g, '\\"')}"`;
+  }
 }

@@ -1,19 +1,19 @@
-import { Token } from "../../../tokenizer/token/Token";
-import { TokenType } from "../../../tokenizer/token/TokenType";
-import { TreeNode, TreeNodeType } from "../TreeNode";
+import type { Token } from '../../../tokenizer/token/Token';
+import type { TokenType } from '../../../tokenizer/token/TokenType';
+import { TreeNode, TreeNodeType } from '../TreeNode';
 
 export class UnknownSyntax extends TreeNode {
-    public type = TreeNodeType.Unknown;
+  public type = TreeNodeType.Unknown;
 
-    public token: Token<TokenType>;
+  public token: Token<TokenType>;
 
-    constructor(token: Token<TokenType>) {
-        super();
+  constructor(token: Token<TokenType>) {
+    super();
 
-        this.token = token;
-    }
+    this.token = token;
+  }
 
-    public toString(): string {
-        return `<!-UNKNOWN:${this.token.value}->`;
-    }
+  public toString(): string {
+    return `<!-UNKNOWN:${this.token.value}->`;
+  }
 }

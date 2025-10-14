@@ -1,22 +1,21 @@
-import { NumberToken } from "../../../../tokenizer/token/tokens/number";
-import { TreeNode, TreeNodeType } from "../../TreeNode";
+import type { NumberToken } from '../../../../tokenizer/token/tokens/number';
+import { TreeNode, TreeNodeType } from '../../TreeNode';
 
 export class NumberLiteral extends TreeNode {
-    public type = TreeNodeType.NumberLiteral;
+  public type = TreeNodeType.NumberLiteral;
 
-    public token: NumberToken;
+  public token: NumberToken;
 
-    public value: number;
+  public value: number;
 
-    constructor(token: NumberToken) {
-        super();
+  constructor(token: NumberToken) {
+    super();
 
-        this.token = token;
-        this.value = Number(token.value);
-    }
+    this.token = token;
+    this.value = Number(token.value);
+  }
 
-    public toString(): string {
-        return String(this.value);
-    }
-
+  public toString(): string {
+    return String(this.value);
+  }
 }
