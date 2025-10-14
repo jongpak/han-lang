@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import readline from 'readline';
 import stringWidth from 'string-width';
 import { Tokenizer } from '../tokenizer';

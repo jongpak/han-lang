@@ -1,7 +1,7 @@
 import type { IfToken } from '../../../../tokenizer/token/tokens/ifElse';
 import { TreeNode, TreeNodeType } from '../../TreeNode';
 
-class IfStatement extends TreeNode {
+export class IfStatement extends TreeNode {
   public readonly type = TreeNodeType.IfStatement;
   public readonly token: IfToken;
 

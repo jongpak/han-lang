@@ -1,10 +1,10 @@
-import { Token } from './Token';
-import { TokenType } from './TokenType';
+export { Token } from './Token';
+export { TokenType } from './TokenType';
 
-import { WhitespaceToken } from './tokens/whitespace';
-import { NumberToken } from './tokens/number';
-import { TrueToken, FalseToken } from './tokens/boolean';
-import {
+export { WhitespaceToken } from './tokens/whitespace';
+export { NumberToken } from './tokens/number';
+export { TrueToken, FalseToken } from './tokens/boolean';
+export {
   LeftParanToken,
   RightParanToken,
   LeftBraceToken,
