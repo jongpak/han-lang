@@ -27,12 +27,7 @@ import { MultiplyExpression } from './ast/node/expression/MultiplyExpression';
 import { DivideExpression } from './ast/node/expression/DivideExpression';
 import { PlusExpression } from './ast/node/expression/PlusExpression';
 import { MinusExpression } from './ast/node/expression/MinusExpression';
-import {
-  LeftBraceToken,
-  LeftParanToken,
-  RightBraceToken,
-  RightParanToken,
-} from '../tokenizer/token/tokens/bracket';
+import { LeftBraceToken, LeftParanToken, RightBraceToken, RightParanToken } from '../tokenizer/token/tokens/bracket';
 import { FunctionCallExpression } from './ast/node/expression/FunctionCallExpression';
 import { FunctionDeclareExpression } from './ast/node/expression/FunctionDeclareExpression';
 import { CommaToken } from '../tokenizer/token/tokens/comma';
@@ -64,9 +59,7 @@ export class Parser {
   private errors: ParseError[] = [];
 
   constructor(tokens: Token<TokenType>[]) {
-    this.tokens = tokens.filter(
-      (token) => !(token instanceof WhitespaceToken) && !(token instanceof CommentToken),
-    );
+    this.tokens = tokens.filter((token) => !(token instanceof WhitespaceToken) && !(token instanceof CommentToken));
   }
 
   public parse(): TreeNode[] {
@@ -211,10 +204,7 @@ export class Parser {
     let left = this.parsePrefix();
 
     // 중위 표현식
-    while (
-      this.current() &&
-      precedence < operatorPrecedence[this.current().type as keyof typeof operatorPrecedence]
-    ) {
+    while (this.current() && precedence < operatorPrecedence[this.current().type as keyof typeof operatorPrecedence]) {
       left = this.parseInfix(left);
     }
 
@@ -335,11 +325,7 @@ export class Parser {
     const current = this.current();
     if (current instanceof MultiplyOperatorToken) {
       this.forward();
-      return new MultiplyExpression(
-        current,
-        left,
-        this.parseExpression(operatorPrecedence[current.type]),
-      );
+      return new MultiplyExpression(current, left, this.parseExpression(operatorPrecedence[current.type]));
     } else {
       this.forward();
       this.errors.push(new ParseError('곱셈 기호가 와야합니다', current));
@@ -351,11 +337,7 @@ export class Parser {
     const current = this.current();
     if (current instanceof DivideOperatorToken) {
       this.forward();
-      return new DivideExpression(
-        current,
-        left,
-        this.parseExpression(operatorPrecedence[current.type]),
-      );
+      return new DivideExpression(current, left, this.parseExpression(operatorPrecedence[current.type]));
     } else {
       this.forward();
       this.errors.push(new ParseError('나눗셈 기호가 와야합니다', current));
@@ -367,11 +349,7 @@ export class Parser {
     const current = this.current();
     if (current instanceof PlusOperatorToken) {
       this.forward();
-      return new PlusExpression(
-        current,
-        left,
-        this.parseExpression(operatorPrecedence[current.type]),
-      );
+      return new PlusExpression(current, left, this.parseExpression(operatorPrecedence[current.type]));
     } else {
       this.forward();
       this.errors.push(new ParseError('덧셈 기호가 와야합니다', current));
@@ -383,11 +361,7 @@ export class Parser {
     const current = this.current();
     if (current instanceof MinusOperatorToken) {
       this.forward();
-      return new MinusExpression(
-        current,
-        left,
-        this.parseExpression(operatorPrecedence[current.type]),
-      );
+      return new MinusExpression(current, left, this.parseExpression(operatorPrecedence[current.type]));
     } else {
       this.forward();
       this.errors.push(new ParseError('뻘샘 기호가 와야합니다', current));
@@ -436,9 +410,7 @@ export class Parser {
         break;
       } else {
         this.forward();
-        this.errors.push(
-          new ParseError('잘못된 함수 파라미터입니다. 콤마 또는 닫기 괄호가 와야합니다', current),
-        );
+        this.errors.push(new ParseError('잘못된 함수 파라미터입니다. 콤마 또는 닫기 괄호가 와야합니다', current));
         parameters.push(new UnknownSyntax(current));
       }
     }

@@ -40,9 +40,7 @@ rl.on('line', (line) => {
   console.log('<< ERRORS >>');
   console.log(parser.getErrors());
   parser.getErrors().forEach((error) => {
-    console.log(
-      `(line: ${error.token.position.row + 1}, col: ${error.token.position.col + 1}) - ${error.message}`,
-    );
+    console.log(`(line: ${error.token.position.row + 1}, col: ${error.token.position.col + 1}) - ${error.message}`);
 
     const errorLine = findLine(line, error.token.position.pos);
     const errorStart = stringWidth(errorLine.substring(0, error.token.position.col));
