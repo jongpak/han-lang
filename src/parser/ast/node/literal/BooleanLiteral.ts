@@ -2,7 +2,7 @@ import { TokenType } from "../../../../tokenizer/token/TokenType";
 import { FalseToken, TrueToken } from "../../../../tokenizer/token/tokens/boolean";
 import { TreeNode, TreeNodeType } from "../../TreeNode";
 
-class BooleanLiteral extends TreeNode {
+export class BooleanLiteral extends TreeNode {
     public type = TreeNodeType.BooleanLiteral;
 
     public token: TrueToken | FalseToken;
@@ -21,5 +21,3 @@ class BooleanLiteral extends TreeNode {
     }
 
 }
-
-export { BooleanLiteral };

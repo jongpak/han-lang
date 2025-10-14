@@ -1,7 +1,7 @@
 import { Token } from "../../tokenizer/token/Token";
 import { TokenType } from "../../tokenizer/token/TokenType";
 
-enum TreeNodeType {
+export enum TreeNodeType {
     Unknown = "Unknown",
 
     AssignmentStatement = "AssignmentStatement",
@@ -25,12 +25,10 @@ enum TreeNodeType {
     FunctionDeclareExpression = "FunctionDeclareExpression",
 }
 
-abstract class TreeNode {
+export abstract class TreeNode {
     public abstract readonly type: TreeNodeType;
 
     public abstract readonly token: Token<TokenType>;
 
     public abstract toString(): string;
 }
-
-export { TreeNode, TreeNodeType };

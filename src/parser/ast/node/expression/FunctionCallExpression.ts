@@ -2,7 +2,7 @@ import { LeftParanToken } from "../../../../tokenizer/token/tokens/bracket";
 import { TreeNode, TreeNodeType } from "../../TreeNode";
 import { Identifier } from "../Identifier";
 
-class FunctionCallExpression extends TreeNode {
+export class FunctionCallExpression extends TreeNode {
     public readonly type = TreeNodeType.FunctionCallExpression;
 
     public readonly token: LeftParanToken;
@@ -26,5 +26,3 @@ class FunctionCallExpression extends TreeNode {
         return `${this.name}(${this.parameters.map((args) => args.toString()).join(', ')})`;
     }
 }
-
-export { FunctionCallExpression };

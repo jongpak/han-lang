@@ -14,7 +14,7 @@ import { StringLiteral } from "../literal/StringLiteral";
 type Literal = NumberLiteral | StringLiteral | BooleanLiteral;
 type MathExpression = PlusExpression | MinusExpression | MultiplyExpression | DivideExpression;
 
-class AssignmentStatement extends TreeNode {
+export class AssignmentStatement extends TreeNode {
     public readonly type = TreeNodeType.AssignmentStatement;
 
     public readonly token: AssignOperatorToken;
@@ -42,5 +42,3 @@ class AssignmentStatement extends TreeNode {
     }
 
 }
-
-export { AssignmentStatement };

@@ -1,7 +1,7 @@
 import { EqualOperatorToken } from "../../../../tokenizer/token/tokens/operator";
 import { TreeNode, TreeNodeType } from "../../TreeNode";
 
-class EqualExpression extends TreeNode {
+export class EqualExpression extends TreeNode {
     public readonly type = TreeNodeType.EqualExpression;
 
     public readonly token: EqualOperatorToken;
@@ -25,5 +25,3 @@ class EqualExpression extends TreeNode {
         return `(${this.left.toString()} ${this.operator} ${this.right.toString()})`;
     }
 }
-
-export { EqualExpression };

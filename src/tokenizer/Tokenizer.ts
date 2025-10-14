@@ -15,7 +15,7 @@ import { StringToken } from "./token/tokens/string";
 import { UnknownToken } from "./token/tokens/unknown";
 import { WhitespaceToken } from "./token/tokens/whitespace";
 
-class Tokenizer {
+export class Tokenizer {
     private reader: Reader;
 
     private tokens: Token<TokenType>[] = [];
@@ -345,5 +345,3 @@ class Tokenizer {
         return false;
     }
 }
-
-export { Tokenizer };

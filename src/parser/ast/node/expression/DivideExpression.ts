@@ -1,7 +1,7 @@
 import { DivideOperatorToken } from "../../../../tokenizer/token/tokens/operator";
 import { TreeNode, TreeNodeType } from "../../TreeNode";
 
-class DivideExpression extends TreeNode {
+export class DivideExpression extends TreeNode {
     public readonly type = TreeNodeType.DivideExpression;
 
     public readonly token: DivideOperatorToken;
@@ -25,5 +25,3 @@ class DivideExpression extends TreeNode {
         return `(${this.left.toString()} ${this.operator} ${this.right.toString()})`;
     }
 }
-
-export { DivideExpression };

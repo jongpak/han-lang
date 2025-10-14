@@ -1,3 +1,1 @@
-import { Tokenizer } from "./Tokenizer";
-
-export { Tokenizer };
+export { Tokenizer } from "./Tokenizer";

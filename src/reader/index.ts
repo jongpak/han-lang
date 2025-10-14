@@ -1,3 +1,1 @@
-import { Reader } from "./Reader";
-
-export { Reader };
+export { Reader } from "./Reader";

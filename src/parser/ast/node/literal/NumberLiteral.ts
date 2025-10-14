@@ -1,7 +1,7 @@
 import { NumberToken } from "../../../../tokenizer/token/tokens/number";
 import { TreeNode, TreeNodeType } from "../../TreeNode";
 
-class NumberLiteral extends TreeNode {
+export class NumberLiteral extends TreeNode {
     public type = TreeNodeType.NumberLiteral;
 
     public token: NumberToken;
@@ -20,5 +20,3 @@ class NumberLiteral extends TreeNode {
     }
 
 }
-
-export { NumberLiteral };

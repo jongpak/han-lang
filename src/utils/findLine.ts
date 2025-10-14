@@ -1,4 +1,4 @@
-function findLine(str: string, pos: number) {
+export function findLine(str: string, pos: number) {
     let start = pos;
     let end = pos;
 
@@ -21,5 +21,3 @@ function findLine(str: string, pos: number) {
 
     return str.substring(start, end);
 }
-
-export { findLine };

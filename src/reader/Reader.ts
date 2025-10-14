@@ -1,4 +1,4 @@
-class Reader {
+export class Reader {
     private str = '';
 
     /**
@@ -66,5 +66,3 @@ class Reader {
         return this._col;
     }
 }
-
-export { Reader };

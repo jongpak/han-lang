@@ -45,7 +45,7 @@ const operatorPrecedence = {
     [TokenType.LEFT_PAREN]:    100,
 }
 
-class Parser {
+export class Parser {
     private tokens: Token<TokenType>[];
 
     private _position = 0;
@@ -490,5 +490,3 @@ class Parser {
         return this.current() === undefined || this.current() instanceof EofToken;
     }
 }
-
-export { Parser };

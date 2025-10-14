@@ -1,6 +1,6 @@
 import { TokenType } from "./TokenType";
 
-abstract class Token<T extends TokenType, V extends string = string> {
+export abstract class Token<T extends TokenType, V extends string = string> {
     public abstract readonly type: T;
     public readonly value: V;
 
@@ -19,5 +19,3 @@ abstract class Token<T extends TokenType, V extends string = string> {
         return `'${this.value}' (${this.type})`;
     }
 }
-
-export { Token };

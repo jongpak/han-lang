@@ -1,7 +1,7 @@
 import { StringToken } from "../../../../tokenizer/token/tokens/string";
 import { TreeNode, TreeNodeType } from "../../TreeNode";
 
-class StringLiteral extends TreeNode {
+export class StringLiteral extends TreeNode {
     public type = TreeNodeType.StringLiteral;
 
     public token: StringToken;
@@ -20,5 +20,3 @@ class StringLiteral extends TreeNode {
     }
 
 }
-
-export { StringLiteral };

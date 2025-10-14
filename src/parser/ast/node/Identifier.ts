@@ -1,7 +1,7 @@
 import { IdentifierToken } from "../../../tokenizer/token/tokens/identifier";
 import { TreeNode, TreeNodeType } from "../TreeNode";
 
-class Identifier extends TreeNode {
+export class Identifier extends TreeNode {
     public type = TreeNodeType.Identifier;
 
     public token: IdentifierToken;
@@ -19,5 +19,3 @@ class Identifier extends TreeNode {
         return this.token.value;
     }
 }
-
-export { Identifier };

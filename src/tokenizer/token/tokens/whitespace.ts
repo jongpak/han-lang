@@ -1,7 +1,7 @@
 import { Token } from "../Token";
 import { TokenType } from "../TokenType";
 
-class WhitespaceToken extends Token<TokenType.WHITESPACE, '\n' | '\r' | '\t' | ' '> {
+export class WhitespaceToken extends Token<TokenType.WHITESPACE, '\n' | '\r' | '\t' | ' '> {
     public readonly type = TokenType.WHITESPACE;
 
     public toString() {
@@ -12,5 +12,3 @@ class WhitespaceToken extends Token<TokenType.WHITESPACE, '\n' | '\r' | '\t' | '
         return `'${escapedValue}' (${this.type})`;
     }
 }
-
-export { WhitespaceToken };

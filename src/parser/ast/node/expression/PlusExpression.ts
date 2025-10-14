@@ -1,7 +1,7 @@
 import { PlusOperatorToken } from "../../../../tokenizer/token/tokens/operator";
 import { TreeNode, TreeNodeType } from "../../TreeNode";
 
-class PlusExpression extends TreeNode {
+export class PlusExpression extends TreeNode {
     public readonly type = TreeNodeType.PlusExpression;
 
     public readonly token: PlusOperatorToken;
@@ -25,5 +25,3 @@ class PlusExpression extends TreeNode {
         return `(${this.left.toString()} ${this.operator} ${this.right.toString()})`;
     }
 }
-
-export { PlusExpression };

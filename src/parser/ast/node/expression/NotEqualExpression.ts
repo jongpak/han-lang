@@ -1,7 +1,7 @@
 import { NotEqualOperatorToken } from "../../../../tokenizer/token/tokens/operator";
 import { TreeNode, TreeNodeType } from "../../TreeNode";
 
-class NotEqualExpression extends TreeNode {
+export class NotEqualExpression extends TreeNode {
     public readonly type = TreeNodeType.NotEqualExpression;
 
     public readonly token: NotEqualOperatorToken;
@@ -25,5 +25,3 @@ class NotEqualExpression extends TreeNode {
         return `(${this.left.toString()} ${this.operator} ${this.right.toString()})`;
     }
 }
-
-export { NotEqualExpression };

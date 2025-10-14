@@ -2,7 +2,7 @@ import { LeftParanToken } from "../../../../tokenizer/token/tokens/bracket";
 import { IdentifierToken } from "../../../../tokenizer/token/tokens/identifier";
 import { TreeNode, TreeNodeType } from "../../TreeNode";
 
-class FunctionDeclareExpression extends TreeNode {
+export class FunctionDeclareExpression extends TreeNode {
     public readonly type = TreeNodeType.FunctionDeclareExpression;
     public readonly token: LeftParanToken;
 
@@ -23,5 +23,3 @@ class FunctionDeclareExpression extends TreeNode {
 }`;
     }
 }
-
-export { FunctionDeclareExpression };

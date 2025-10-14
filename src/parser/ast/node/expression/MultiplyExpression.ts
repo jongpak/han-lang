@@ -1,7 +1,7 @@
 import { MultiplyOperatorToken } from "../../../../tokenizer/token/tokens/operator";
 import { TreeNode, TreeNodeType } from "../../TreeNode";
 
-class MultiplyExpression extends TreeNode {
+export class MultiplyExpression extends TreeNode {
     public readonly type = TreeNodeType.MultiplyExpression;
 
     public readonly token: MultiplyOperatorToken;
@@ -25,5 +25,3 @@ class MultiplyExpression extends TreeNode {
         return `(${this.left.toString()} ${this.operator} ${this.right.toString()})`;
     }
 }
-
-export { MultiplyExpression };

@@ -1,4 +1,4 @@
-enum TokenType {
+export enum TokenType {
     UNKNOWN = 'UNKNOWN',
 
     EOF = 'EOF',
@@ -98,5 +98,3 @@ enum TokenType {
     /** [ㄱ-ㅣ가-힣a-zA-Z_]+[ㄱ-ㅣ가-힣a-zA-Z_0-9]* */
     IDENTIFIER = 'IDENTIFIER',
 }
-
-export { TokenType };

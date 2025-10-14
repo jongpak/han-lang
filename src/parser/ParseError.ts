@@ -1,7 +1,7 @@
 import { Token } from "../tokenizer/token/Token";
 import { TokenType } from "../tokenizer/token/TokenType";
 
-class ParseError {
+export class ParseError {
     public readonly message: string;
 
     public readonly token: Token<TokenType>;
@@ -11,5 +11,3 @@ class ParseError {
         this.token = token;
     }
 }
-
-export { ParseError };

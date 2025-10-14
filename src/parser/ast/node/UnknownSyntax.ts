@@ -2,7 +2,7 @@ import { Token } from "../../../tokenizer/token/Token";
 import { TokenType } from "../../../tokenizer/token/TokenType";
 import { TreeNode, TreeNodeType } from "../TreeNode";
 
-class UnknownSyntax extends TreeNode {
+export class UnknownSyntax extends TreeNode {
     public type = TreeNodeType.Unknown;
 
     public token: Token<TokenType>;
@@ -17,5 +17,3 @@ class UnknownSyntax extends TreeNode {
         return `<!-UNKNOWN:${this.token.value}->`;
     }
 }
-
-export { UnknownSyntax };
